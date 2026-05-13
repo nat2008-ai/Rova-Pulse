@@ -234,7 +234,7 @@ export default function Dashboard() {
         <aside
           className="overflow-y-auto shrink-0"
           style={{
-            width: 290,
+            width: 320,
             padding: '28px 20px 40px',
             borderLeft: '1px solid #E7D9C8',
           }}

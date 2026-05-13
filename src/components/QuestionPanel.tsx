@@ -66,13 +66,13 @@ export default function QuestionPanel() {
       }}
     >
       {/* Header */}
-      <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center gap-2">
-          <span className="font-semibold" style={{ fontSize: 18, color: '#2B2924' }}>
+      <div className="flex items-center justify-between gap-2 mb-3">
+        <div className="flex items-center gap-2 min-w-0">
+          <span className="font-semibold whitespace-nowrap" style={{ fontSize: 18, color: '#2B2924' }}>
             Open questions
           </span>
           <span
-            className="inline-flex items-center justify-center font-semibold rounded-pill"
+            className="inline-flex items-center justify-center font-semibold rounded-pill shrink-0"
             style={{
               width: 22,
               height: 22,
@@ -84,7 +84,7 @@ export default function QuestionPanel() {
             3
           </span>
         </div>
-        <a href="#" style={{ fontSize: 12, color: '#C95632', fontWeight: 500 }}>
+        <a href="#" className="whitespace-nowrap shrink-0" style={{ fontSize: 12, color: '#C95632', fontWeight: 500 }}>
           View all
         </a>
       </div>
