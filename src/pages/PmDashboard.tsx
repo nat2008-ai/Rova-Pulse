@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 
 // ─── Icons ────────────────────────────────────────────────────────────────────
@@ -130,6 +131,7 @@ const campaignQueue = [
 ];
 
 export default function PmDashboard() {
+  const navigate = useNavigate();
   const [search, setSearch] = useState('');
 
   const filtered = campaignQueue.filter(c =>
@@ -248,7 +250,9 @@ export default function PmDashboard() {
             }}
           >
             {filtered.map((c, i) => (
-              <QueueCard key={i} {...c} />
+              <div key={i} onClick={() => navigate('/pm/update')} style={{ cursor: 'pointer' }}>
+                <QueueCard {...c} />
+              </div>
             ))}
           </div>
         </div>
