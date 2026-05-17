@@ -155,9 +155,9 @@ export default function CampaignDetail() {
                         backgroundColor: '#FFFDF8',
                         border: '1px solid #D9B36C',
                         borderRadius: 10,
-                        padding: '9px 28px',
+                        padding: '9px 16px',
                         cursor: 'pointer',
-                        width: 132,
+                        whiteSpace: 'nowrap',
                       }}
                     >
                       Add Comment
@@ -350,7 +350,6 @@ export default function CampaignDetail() {
 
               {/* Launch window may shift */}
               <div style={{ backgroundColor: '#FFFDF8', border: '1px solid #E7D9C8', borderRadius: 12, padding: '10px 16px 10px 12px', minHeight: 94 }}>
-                <div className="absolute" style={{ left: 12, top: 10 }} />
                 <div className="flex items-start gap-4">
                   <div
                     className="flex items-center justify-center shrink-0 rounded-full"
@@ -362,6 +361,30 @@ export default function CampaignDetail() {
                     <div className="font-semibold" style={{ fontSize: 13, color: '#D89B35' }}>Launch window may shift</div>
                     <div className="font-medium" style={{ fontSize: 12, color: '#8A8074', lineHeight: 1.4 }}>
                       May move from 21 May to 22 May if final copy is not approved.
+                    </div>
+                    <div style={{ fontSize: 8, color: '#8A8074' }}>Today, 10:15 AM &bull; Devlab PM</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Reason for copy change */}
+              <div style={{ backgroundColor: '#FFFDF8', border: '1px solid #E7D9C8', borderRadius: 12, padding: 20 }}>
+                <div className="flex items-start gap-4">
+                  <div
+                    className="flex items-center justify-center shrink-0 rounded-full"
+                    style={{ width: 30, height: 30, backgroundColor: '#F3ECE3', marginTop: 2 }}
+                  >
+                    {/* Edit / copy icon */}
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ display: 'block' }}>
+                      <path d="M9.5 2.5L13.5 6.5L5 15H1V11L9.5 2.5Z" stroke="#A66A45" strokeWidth="1.2" strokeLinejoin="round"/>
+                      <path d="M7 4.5L11.5 9" stroke="#A66A45" strokeWidth="1.2" strokeLinecap="round"/>
+                      <path d="M13 13H15" stroke="#A66A45" strokeWidth="1.2" strokeLinecap="round"/>
+                    </svg>
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <div className="font-semibold" style={{ fontSize: 13, color: '#A66A45' }}>Reason for copy change</div>
+                    <div className="font-medium" style={{ fontSize: 12, color: '#6E665C', lineHeight: 1.5 }}>
+                      The previous copy did not clearly explain the bundle discount, so the latest version was updated to make the offer easier to understand.
                     </div>
                     <div style={{ fontSize: 8, color: '#8A8074' }}>Today, 10:15 AM &bull; Devlab PM</div>
                   </div>
