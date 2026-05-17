@@ -15,7 +15,7 @@ const milestones = [
   },
   {
     id: 3,
-    date: '21 May',
+    date: '21 May 2026',
     time: '',
     name: 'Campaign launch',
     campaign: 'Spring Collection Launch',
