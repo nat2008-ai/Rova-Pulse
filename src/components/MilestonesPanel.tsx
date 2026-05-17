@@ -32,11 +32,11 @@ export default function MilestonesPanel() {
         padding: 20,
       }}
     >
-      <div className="flex items-center justify-between mb-3">
+      <div className="flex items-start justify-between gap-2 mb-3">
         <span className="font-semibold" style={{ fontSize: 18, color: '#2B2924' }}>
           Upcoming milestones
         </span>
-        <a href="#" style={{ fontSize: 12, color: '#C95632', fontWeight: 500 }}>
+        <a href="#" className="shrink-0 whitespace-nowrap" style={{ fontSize: 12, color: '#C95632', fontWeight: 500, textAlign: 'right' }}>
           View calendar
         </a>
       </div>
