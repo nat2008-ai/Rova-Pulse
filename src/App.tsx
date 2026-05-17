@@ -6,6 +6,7 @@ import Placeholder from './pages/Placeholder';
 import BirthdayGame from './BirthdayGame';
 import PmDashboard from './pages/PmDashboard';
 import PmStage2 from './pages/PmStage2';
+import PmPublished from './pages/PmPublished';
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
         <Route path="/internal" element={<InternalUpdate />} />
         <Route path="/pm" element={<PmDashboard />} />
         <Route path="/pm/update" element={<PmStage2 />} />
+        <Route path="/pm/published" element={<PmPublished />} />
         <Route path="/birthday" element={<BirthdayGame />} />
         <Route path="*" element={<Placeholder />} />
       </Routes>

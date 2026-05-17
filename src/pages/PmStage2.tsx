@@ -451,6 +451,7 @@ export default function PmStage2() {
             {/* Publish button — only shown after generate */}
             {generated && (
               <button
+                onClick={() => navigate('/pm/published')}
                 style={{
                   width: '100%', height: 43,
                   fontSize: 14, fontWeight: 600, color: 'white',
