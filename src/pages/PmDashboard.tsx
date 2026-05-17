@@ -155,23 +155,25 @@ export default function PmDashboard() {
             </p>
           </div>
 
-          {/* Right — DevLab PM + last client update */}
-          <div className="flex flex-col items-end gap-2">
-            <div className="flex items-center gap-2">
-              <div className="flex flex-col items-end">
-                <span className="font-semibold" style={{ fontSize: 13, color: '#2B2924' }}>DevLab's PM</span>
-                <span style={{ fontSize: 11, color: '#8A8074' }}>Alyna Tan</span>
-              </div>
+          {/* Right — Last client update + DevLab PM side by side */}
+          <div className="flex items-center shrink-0" style={{ gap: 36 }}>
+            {/* Last client update */}
+            <div style={{ fontSize: 12, color: '#5C554B', lineHeight: 1.5 }}>
+              <div>Last client update:</div>
+              <div style={{ fontWeight: 500 }}>Yesterday, 4:30PM</div>
+            </div>
+            {/* Avatar + name */}
+            <div className="flex items-end gap-2.5">
               <div
                 className="rounded-full flex items-center justify-center font-semibold shrink-0"
-                style={{ width: 36, height: 36, backgroundColor: '#EBC0B9', fontSize: 12, color: '#2B2924' }}
+                style={{ width: 36, height: 36, backgroundColor: '#EBC0B9', fontSize: 13, color: '#2B2924' }}
               >
                 AT
               </div>
-            </div>
-            <div className="flex items-center gap-1.5" style={{ fontSize: 11, color: '#8A8074' }}>
-              <ClockIcon color="#8A8074" />
-              <span>Last client update: <span style={{ color: '#5C554B', fontWeight: 500 }}>Yesterday 4:30 PM</span></span>
+              <div className="flex flex-col" style={{ gap: 4 }}>
+                <span className="font-semibold whitespace-nowrap" style={{ fontSize: 13, color: '#2B2924' }}>Alyna</span>
+                <span style={{ fontSize: 11, color: '#6E665C' }}>DevLab's PM</span>
+              </div>
             </div>
           </div>
         </div>
