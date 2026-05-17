@@ -359,7 +359,7 @@ export default function PmStage2() {
             </div>
 
             <a href="#" style={{ fontSize: 12, color: '#2B2924', textDecoration: 'underline' }}>
-              Edit Progress Timeline
+              Update milestone status
             </a>
           </div>
 
