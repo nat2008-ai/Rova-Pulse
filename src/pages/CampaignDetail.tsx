@@ -46,41 +46,80 @@ export default function CampaignDetail() {
       <main className="flex-1 overflow-y-auto" style={{ padding: '34px 28px 48px' }}>
 
         {/* Page header */}
-        <div className="flex flex-col gap-3 mb-7" style={{ maxWidth: 498 }}>
-          {/* Back link */}
-          <button
-            onClick={() => navigate('/')}
-            className="flex items-center gap-1.5 transition-opacity hover:opacity-70"
-            style={{ fontSize: 13, color: '#C95632', fontWeight: 600, background: 'none', border: 'none', cursor: 'pointer', padding: 0, width: 'fit-content' }}
-          >
-            <BackArrowIcon />
-            Back to dashboard
-          </button>
+        <div className="flex items-start justify-between mb-7">
+          {/* Left: back + title */}
+          <div className="flex flex-col gap-3">
+            <button
+              onClick={() => navigate('/')}
+              className="flex items-center gap-1.5 transition-opacity hover:opacity-70"
+              style={{ fontSize: 13, color: '#C95632', fontWeight: 600, background: 'none', border: 'none', cursor: 'pointer', padding: 0, width: 'fit-content' }}
+            >
+              <BackArrowIcon />
+              Back to dashboard
+            </button>
 
-          {/* Title row */}
-          <div>
-            <div className="flex items-center gap-3 mb-1.5">
-              <h1 className="font-bold leading-tight" style={{ fontSize: 30, color: '#2B2924' }}>
-                Spring Collection Launch
-              </h1>
-              <span
-                className="inline-flex items-center justify-center font-medium shrink-0"
-                style={{
-                  fontSize: 12,
-                  backgroundColor: '#F6E7CC',
-                  color: '#A77734',
-                  border: '1px solid #D9B36C',
-                  borderRadius: 999,
-                  padding: '4px 14px',
-                  height: 28,
-                }}
-              >
-                AT RISK
-              </span>
+            <div>
+              <div className="flex items-center gap-3 mb-1.5">
+                <h1 className="font-bold leading-tight" style={{ fontSize: 30, color: '#2B2924' }}>
+                  Spring Collection Launch
+                </h1>
+                <span
+                  className="inline-flex items-center justify-center font-medium shrink-0"
+                  style={{
+                    fontSize: 12,
+                    backgroundColor: '#F6E7CC',
+                    color: '#A77734',
+                    border: '1px solid #D9B36C',
+                    borderRadius: 999,
+                    padding: '4px 14px',
+                    height: 28,
+                  }}
+                >
+                  AT RISK
+                </span>
+              </div>
+              <p style={{ fontSize: 14, color: '#6E665C' }}>
+                Launch date: 21 May 2026 &bull; Last updated today, 10:15 AM by Devlab PM
+              </p>
             </div>
-            <p style={{ fontSize: 14, color: '#6E665C' }}>
-              Launch date: 21 May 2026 &bull; Last updated today, 10:15 AM by Devlab PM
-            </p>
+          </div>
+
+          {/* Right: Last synced · Bell · Avatar */}
+          <div className="flex items-center gap-3 shrink-0">
+            <div className="flex items-center gap-1.5" style={{ fontSize: 12, color: '#8A8074' }}>
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                <path d="M5 7.5C5.5 8.2 6.3 8.5 7 8.5L9.5 6C10.3 5.2 10.3 3.8 9.5 3L9 2.5C8.2 1.7 6.8 1.7 6 2.5L4.5 4" stroke="#8A8074" strokeWidth="1.2" strokeLinecap="round"/>
+                <path d="M8 5.5C7.5 4.8 6.7 4.5 6 4.5L3.5 7C2.7 7.8 2.7 9.2 3.5 10L4 10.5C4.8 11.3 6.2 11.3 7 10.5L8.5 9" stroke="#8A8074" strokeWidth="1.2" strokeLinecap="round"/>
+              </svg>
+              <span>Last synced: 10:42 AM</span>
+            </div>
+            {/* Bell */}
+            <div className="relative cursor-pointer">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <path d="M9 2C9 2 5 4 5 9V13H13V9C13 4 9 2 9 2Z" stroke="#5C554B" strokeWidth="1.3" strokeLinejoin="round"/>
+                <path d="M7 13C7 14.1 7.9 15 9 15C10.1 15 11 14.1 11 13" stroke="#5C554B" strokeWidth="1.3"/>
+                <path d="M9 2V1" stroke="#5C554B" strokeWidth="1.3" strokeLinecap="round"/>
+              </svg>
+              <div
+                className="absolute flex items-center justify-center font-bold rounded-full"
+                style={{ top: -4, right: -4, width: 14, height: 14, backgroundColor: '#D65B35', fontSize: 8, color: 'white' }}
+              >
+                2
+              </div>
+            </div>
+            {/* Avatar */}
+            <div className="flex items-center gap-2">
+              <div
+                className="rounded-full flex items-center justify-center font-semibold shrink-0"
+                style={{ width: 32, height: 32, backgroundColor: '#EBC0B9', fontSize: 11, color: '#2B2924' }}
+              >
+                PS
+              </div>
+              <div>
+                <div className="font-semibold leading-none" style={{ fontSize: 13, color: '#2B2924' }}>Priya Shah</div>
+                <div style={{ fontSize: 11, color: '#8A8074', marginTop: 2 }}>Rova</div>
+              </div>
+            </div>
           </div>
         </div>
 
