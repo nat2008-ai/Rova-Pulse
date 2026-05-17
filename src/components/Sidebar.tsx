@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 const navItems = [
   { label: 'Dashboard', path: '/', icon: GridIcon },
@@ -85,8 +85,20 @@ interface SidebarProps {
   agencyMode?: boolean;
 }
 
+function DevlabIcon() {
+  return (
+    <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+      <rect x="1" y="3" width="11" height="8" rx="1.5" stroke="#2B2924" strokeWidth="1.2"/>
+      <path d="M4 3V2.5C4 1.67 4.67 1 5.5 1H7.5C8.33 1 9 1.67 9 2.5V3" stroke="#2B2924" strokeWidth="1.2"/>
+      <path d="M1 6.5H12" stroke="#2B2924" strokeWidth="1.2" strokeLinecap="round"/>
+      <circle cx="6.5" cy="6.5" r="1" fill="#2B2924"/>
+    </svg>
+  );
+}
+
 export default function Sidebar({ agencyMode = false }: SidebarProps) {
   const location = useLocation();
+  const navigate = useNavigate();
 
   return (
     <aside
@@ -239,27 +251,45 @@ export default function Sidebar({ agencyMode = false }: SidebarProps) {
             </button>
           </>
         ) : (
-          <div
-            className="rounded-small p-3"
-            style={{
-              backgroundColor: 'rgba(255,255,255,0.05)',
-              border: '1px solid #554D43',
-            }}
-          >
-            <p className="font-semibold mb-0.5" style={{ fontSize: 11, color: '#F7F1E8' }}>
-              Need help?
-            </p>
-            <p className="mb-2" style={{ fontSize: 10, color: '#CFC1B2' }}>
-              View docs or contact support
-            </p>
-            <a
-              href="#"
-              className="inline-flex items-center gap-1"
-              style={{ fontSize: 10, color: '#D89B35', fontWeight: 500 }}
+          <>
+            <button
+              onClick={() => navigate('/pm')}
+              className="flex items-center justify-center gap-2 w-full font-semibold transition-opacity hover:opacity-90"
+              style={{
+                fontSize: 12,
+                color: '#2B2924',
+                backgroundColor: '#D89B35',
+                border: 'none',
+                borderRadius: 10,
+                padding: '10px 14px',
+                cursor: 'pointer',
+              }}
             >
-              Open docs <ExternalLinkIcon />
-            </a>
-          </div>
+              <DevlabIcon />
+              Devlab Login
+            </button>
+            <div
+              className="rounded-small p-3"
+              style={{
+                backgroundColor: 'rgba(255,255,255,0.05)',
+                border: '1px solid #554D43',
+              }}
+            >
+              <p className="font-semibold mb-0.5" style={{ fontSize: 11, color: '#F7F1E8' }}>
+                Need help?
+              </p>
+              <p className="mb-2" style={{ fontSize: 10, color: '#CFC1B2' }}>
+                View docs or contact support
+              </p>
+              <a
+                href="#"
+                className="inline-flex items-center gap-1"
+                style={{ fontSize: 10, color: '#D89B35', fontWeight: 500 }}
+              >
+                Open docs <ExternalLinkIcon />
+              </a>
+            </div>
+          </>
         )}
       </div>
     </aside>
