@@ -82,7 +82,7 @@ export default function Dashboard() {
         <main className="flex-1 overflow-y-auto" style={{ padding: '28px 28px 40px' }}>
 
           {/* Top bar */}
-          <div className="flex items-end justify-between mb-6">
+          <div className="flex items-start justify-between mb-6">
             {/* Greeting */}
             <div>
               <h1 className="font-bold leading-tight" style={{ fontSize: 30, color: '#2B2924' }}>
@@ -93,40 +93,72 @@ export default function Dashboard() {
               </p>
             </div>
 
-            {/* Actions */}
-            <div className="flex items-center gap-4">
-              <button
-                className="flex items-center gap-1.5 font-semibold transition-opacity hover:opacity-80"
-                style={{
-                  fontSize: 13,
-                  color: '#5C554B',
-                  border: '1px solid #E7D9C8',
-                  backgroundColor: '#FFFDF8',
-                  borderRadius: 10,
-                  padding: '9px 16px',
-                  cursor: 'pointer',
-                  height: 42,
-                }}
-              >
-                <ExportIcon />
-                Export update
-              </button>
-              <button
-                className="flex items-center gap-1.5 font-semibold transition-opacity hover:opacity-80"
-                style={{
-                  fontSize: 13,
-                  color: 'white',
-                  backgroundColor: '#C95632',
-                  border: 'none',
-                  borderRadius: 10,
-                  padding: '9px 16px',
-                  cursor: 'pointer',
-                  height: 42,
-                }}
-              >
-                <PlusIcon />
-                Invite teammate
-              </button>
+            {/* Right: meta + action buttons */}
+            <div className="flex flex-col items-end gap-3">
+              {/* Row 1: Last synced · Bell · Avatar */}
+              <div className="flex items-center gap-3">
+                <div className="flex items-center gap-1.5" style={{ fontSize: 12, color: '#8A8074' }}>
+                  <LinkIcon />
+                  <span>Last synced: 10:42 AM</span>
+                </div>
+                <div className="relative cursor-pointer">
+                  <NavBellIcon />
+                  <div
+                    className="absolute flex items-center justify-center font-bold rounded-full"
+                    style={{ top: -4, right: -4, width: 14, height: 14, backgroundColor: '#D65B35', fontSize: 8, color: 'white' }}
+                  >
+                    2
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div
+                    className="rounded-full flex items-center justify-center font-semibold shrink-0"
+                    style={{ width: 32, height: 32, backgroundColor: '#EBC0B9', fontSize: 11, color: '#2B2924' }}
+                  >
+                    PS
+                  </div>
+                  <div>
+                    <div className="font-semibold leading-none" style={{ fontSize: 13, color: '#2B2924' }}>Priya Shah</div>
+                    <div style={{ fontSize: 11, color: '#8A8074', marginTop: 2 }}>Rova</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Row 2: Export · Invite */}
+              <div className="flex items-center gap-3">
+                <button
+                  className="flex items-center gap-1.5 font-semibold transition-opacity hover:opacity-80"
+                  style={{
+                    fontSize: 13,
+                    color: '#5C554B',
+                    border: '1px solid #E7D9C8',
+                    backgroundColor: '#FFFDF8',
+                    borderRadius: 10,
+                    padding: '9px 16px',
+                    cursor: 'pointer',
+                    height: 42,
+                  }}
+                >
+                  <ExportIcon />
+                  Export update
+                </button>
+                <button
+                  className="flex items-center gap-1.5 font-semibold transition-opacity hover:opacity-80"
+                  style={{
+                    fontSize: 13,
+                    color: 'white',
+                    backgroundColor: '#C95632',
+                    border: 'none',
+                    borderRadius: 10,
+                    padding: '9px 16px',
+                    cursor: 'pointer',
+                    height: 42,
+                  }}
+                >
+                  <PlusIcon />
+                  Invite teammate
+                </button>
+              </div>
             </div>
           </div>
 
@@ -265,7 +297,7 @@ export default function Dashboard() {
           </div>
         </main>
 
-        {/* Right rail — flexible width, aligned with main */}
+        {/* Right rail */}
         <aside
           className="overflow-y-auto shrink-0"
           style={{
@@ -274,40 +306,6 @@ export default function Dashboard() {
             borderLeft: '1px solid #E7D9C8',
           }}
         >
-          {/* Meta row (mirrors the top bar) */}
-          <div className="flex items-center justify-between mb-6" style={{ height: 42 }}>
-            <div className="flex items-center gap-1.5" style={{ fontSize: 12, color: '#8A8074' }}>
-              <LinkIcon />
-              <span>Last synced: 10:42 AM</span>
-            </div>
-            <div className="flex items-center gap-3">
-              {/* Bell */}
-              <div className="relative cursor-pointer">
-                <NavBellIcon />
-                <div
-                  className="absolute flex items-center justify-center font-bold rounded-full"
-                  style={{ top: -4, right: -4, width: 14, height: 14, backgroundColor: '#D65B35', fontSize: 8, color: 'white' }}
-                >
-                  2
-                </div>
-              </div>
-              {/* Avatar */}
-              <div className="flex items-center gap-2">
-                <div
-                  className="rounded-full flex items-center justify-center font-semibold shrink-0"
-                  style={{ width: 30, height: 30, backgroundColor: '#EBC0B9', fontSize: 11, color: '#2B2924' }}
-                >
-                  PS
-                </div>
-                <div>
-                  <div className="font-semibold leading-none" style={{ fontSize: 12, color: '#2B2924' }}>Priya Shah</div>
-                  <div style={{ fontSize: 10, color: '#8A8074' }}>Rova</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Panels */}
           <div className="flex flex-col gap-4">
             <RecentUpdates />
             <MilestonesPanel />

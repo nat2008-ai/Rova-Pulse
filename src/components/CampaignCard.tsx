@@ -83,10 +83,11 @@ function CalendarIcon() {
 }
 function BellIconWhite() {
   return (
-    <svg width="14" height="15" viewBox="0 0 14 15" fill="none">
-      <path d="M7 1.5C7 1.5 3.5 3.5 3.5 8V12H10.5V8C10.5 3.5 7 1.5 7 1.5Z" stroke="#FFFDF8" strokeWidth="1.2" strokeLinejoin="round"/>
-      <path d="M5.5 12C5.5 12.8 6.2 13.5 7 13.5C7.8 13.5 8.5 12.8 8.5 12" stroke="#FFFDF8" strokeWidth="1.2"/>
-      <path d="M7 1.5V1" stroke="#FFFDF8" strokeWidth="1.2" strokeLinecap="round"/>
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ display: 'block', flexShrink: 0 }}>
+      <path d="M8 1.5V2.5" stroke="#FFFDF8" strokeWidth="1.3" strokeLinecap="round"/>
+      <path d="M8 2.5C5.8 2.5 4 4.3 4 6.5V10H12V6.5C12 4.3 10.2 2.5 8 2.5Z" stroke="#FFFDF8" strokeWidth="1.2" strokeLinejoin="round"/>
+      <path d="M3.5 10H12.5" stroke="#FFFDF8" strokeWidth="1.2" strokeLinecap="round"/>
+      <path d="M6.5 10C6.5 11.1 7.2 11.8 8 11.8C8.8 11.8 9.5 11.1 9.5 10" stroke="#FFFDF8" strokeWidth="1.2"/>
     </svg>
   );
 }
