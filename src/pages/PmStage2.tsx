@@ -19,19 +19,33 @@ function DocIcon({ color }: { color: string }) {
     </svg>
   );
 }
-function SparklesIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-      <path d="M10 2L11.5 7H16.5L12.5 10.5L14 15.5L10 12L6 15.5L7.5 10.5L3.5 7H8.5L10 2Z" fill="#677F5A" opacity="0.3"/>
-      <path d="M10 2L11.5 7H16.5L12.5 10.5L14 15.5L10 12L6 15.5L7.5 10.5L3.5 7H8.5L10 2Z" stroke="#677F5A" strokeWidth="1.2" strokeLinejoin="round"/>
-    </svg>
-  );
-}
 function CheckDocIcon() {
   return (
     <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
       <rect x="1" y="1" width="20" height="20" rx="5" fill="#C95632" opacity="0.12"/>
       <path d="M7 11L10 14L15 8" stroke="#C95632" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+}
+function SparklesIcon() {
+  return (
+    <svg width="20" height="24" viewBox="0 0 20 24" fill="none">
+      <path d="M10 2L12 9H19L13.5 13.5L15.5 20.5L10 16L4.5 20.5L6.5 13.5L1 9H8L10 2Z" fill="#677F5A" opacity="0.2" stroke="#677F5A" strokeWidth="1.2" strokeLinejoin="round"/>
+      <path d="M15 1L15.8 3.2L18 4L15.8 4.8L15 7L14.2 4.8L12 4L14.2 3.2L15 1Z" fill="#677F5A" opacity="0.6"/>
+    </svg>
+  );
+}
+function EditIcon() {
+  return (
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+      <path d="M7 1.5L8.5 3L3.5 8H2V6.5L7 1.5Z" stroke="#A77734" strokeWidth="1" strokeLinejoin="round"/>
+    </svg>
+  );
+}
+function BackIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M10 3L5 8L10 13" stroke="#C95632" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   );
 }
@@ -61,13 +75,11 @@ function WorkflowStepper({ currentStep }: { currentStep: number }) {
         const isDone = step.n < currentStep;
         return (
           <div key={step.n} className="flex items-center" style={{ flex: i < steps.length - 1 ? 1 : undefined }}>
-            {/* Step */}
             <div className="flex items-center gap-2.5 shrink-0">
               <div
                 className="flex items-center justify-center font-bold rounded-full shrink-0"
                 style={{
-                  width: 34,
-                  height: 34,
+                  width: 34, height: 34,
                   backgroundColor: isActive ? '#D88A4A' : isDone ? '#D88A4A' : '#F3E6D8',
                   fontSize: 13,
                   color: isActive || isDone ? '#FFFDF8' : '#A77734',
@@ -86,7 +98,6 @@ function WorkflowStepper({ currentStep }: { currentStep: number }) {
                 {step.label}
               </span>
             </div>
-            {/* Connector */}
             {i < steps.length - 1 && (
               <div style={{ flex: 1, height: 1, backgroundColor: '#E7D9C8', margin: '0 16px' }} />
             )}
@@ -97,7 +108,33 @@ function WorkflowStepper({ currentStep }: { currentStep: number }) {
   );
 }
 
-// ─── Main Component ───────────────────────────────────────────────────────────
+// ─── Dropdown field ───────────────────────────────────────────────────────────
+
+function DropdownField({ label, value }: { label: string; value: React.ReactNode }) {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+      <div style={{ fontSize: 12, fontWeight: 500, color: '#6E665C' }}>{label}</div>
+      <div
+        className="flex items-center justify-between"
+        style={{
+          backgroundColor: '#FFFDF8',
+          border: '1px solid #D8C8B7',
+          borderRadius: 10,
+          padding: '10px 14px',
+          height: 44,
+          cursor: 'pointer',
+        }}
+      >
+        {value}
+        <ChevronDownIcon />
+      </div>
+    </div>
+  );
+}
+
+// ─── Main Component ────────────────────────────────────────────────────────────
+
+const DRAFT_TEXT = `Spring Collection is currently at risk because final copy approval is still pending. If approval is received by today at 5 PM, the campaign can remain on schedule. Otherwise, the launch may move by one day.`;
 
 export default function PmStage2() {
   const navigate = useNavigate();
@@ -105,14 +142,8 @@ export default function PmStage2() {
     'Final launch copy is still pending. If approval is not received by 5 PM today, launch may move by one day.'
   );
   const [generated, setGenerated] = useState(false);
-  const [generatedText, setGeneratedText] = useState('');
 
-  const handleGenerate = () => {
-    setGeneratedText(
-      `Hi Priya,\n\nJust a quick update on the Spring Collection Launch — we're currently at the final copy approval stage and it's marked as At Risk.\n\nThe copy is still pending sign-off. If we don't receive approval by 5:00 PM today, the launch date may shift by one day.\n\nPlease let us know as soon as the copy is approved so we can move forward.\n\nBest,\nDevLab's Team`
-    );
-    setGenerated(true);
-  };
+  const activeStep = generated ? 3 : 2;
 
   return (
     <div className="flex h-screen overflow-hidden" style={{ backgroundColor: '#F7F1E8' }}>
@@ -120,18 +151,36 @@ export default function PmStage2() {
 
       <main className="flex-1 overflow-y-auto" style={{ padding: '28px 32px 60px' }}>
 
+        {/* Back link */}
+        <button
+          onClick={() => navigate('/pm')}
+          className="flex items-center gap-1.5"
+          style={{
+            background: 'none',
+            border: 'none',
+            padding: 0,
+            cursor: 'pointer',
+            fontSize: 13,
+            fontWeight: 600,
+            color: '#C95632',
+            marginBottom: 12,
+          }}
+        >
+          <BackIcon />
+          Back to all campaigns
+        </button>
+
         {/* Header */}
         <div className="flex items-start justify-between mb-5">
-          <div>
-            <h1 className="font-bold leading-tight" style={{ fontSize: 28, color: '#2B2924' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+            <h1 className="font-bold" style={{ fontSize: 28, color: '#2B2924', lineHeight: 1.2 }}>
               Spring Collection Launch
             </h1>
-            <p style={{ fontSize: 14, color: '#6E665C', marginTop: 5 }}>
+            <p style={{ fontSize: 14, color: '#6E665C' }}>
               Capture the internal status once, then generate a client-ready draft.
             </p>
           </div>
-
-          {/* Right — Last client update + AT avatar */}
+          {/* AT profile */}
           <div className="flex items-center shrink-0" style={{ gap: 36 }}>
             <div style={{ fontSize: 12, color: '#5C554B', lineHeight: 1.5 }}>
               <div>Last client update:</div>
@@ -144,7 +193,7 @@ export default function PmStage2() {
               >
                 AT
               </div>
-              <div className="flex flex-col" style={{ gap: 4 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
                 <span className="font-semibold" style={{ fontSize: 13, color: '#2B2924' }}>Alyna</span>
                 <span style={{ fontSize: 11, color: '#6E665C' }}>DevLab's PM</span>
               </div>
@@ -153,28 +202,28 @@ export default function PmStage2() {
         </div>
 
         {/* Workflow stepper */}
-        <WorkflowStepper currentStep={2} />
+        <WorkflowStepper currentStep={activeStep} />
 
         {/* Reminder banner */}
         <div
           style={{
             backgroundColor: '#F6E7CC',
-            border: '1px solid #D9B36C',
+            border: '1px solid #A77734',
             borderRadius: 12,
             padding: '16px 20px',
-            marginBottom: 20,
+            marginBottom: 24,
             fontSize: 14,
-            color: '#6E665C',
+            color: '#A66A45',
+            fontWeight: 500,
           }}
         >
-          <span style={{ fontWeight: 700, color: '#A77734' }}>Reminder: </span>
-          Spring Collection Launch is selected. Final copy approval is due today at 5:00 PM.
+          Reminder: Final copy approval is due today at 5:00 PM. This campaign needs a client-visible update.
         </div>
 
-        {/* Two-column body */}
-        <div className="flex gap-5 items-start">
+        {/* Two-column body — stretch-aligned */}
+        <div style={{ display: 'flex', gap: 23, alignItems: 'stretch' }}>
 
-          {/* LEFT — Send Message card */}
+          {/* LEFT — Send Message form */}
           <div
             style={{
               flex: 1,
@@ -191,72 +240,36 @@ export default function PmStage2() {
               Send Message to Client
             </span>
 
-            {/* Dropdowns row */}
-            <div className="flex gap-5">
-              {/* Status */}
+            {/* Dropdown row */}
+            <div style={{ display: 'flex', gap: 20 }}>
               <div style={{ width: 156 }}>
-                <div style={{ fontSize: 12, fontWeight: 500, color: '#6E665C', marginBottom: 8 }}>Status</div>
-                <div
-                  className="flex items-center justify-between"
-                  style={{
-                    backgroundColor: '#FFFDF8',
-                    border: '1px solid #D8C8B7',
-                    borderRadius: 10,
-                    padding: '10px 14px',
-                    height: 44,
-                    cursor: 'pointer',
-                  }}
-                >
-                  <div className="flex items-center gap-2.5">
-                    <div className="rounded-full shrink-0" style={{ width: 8, height: 8, backgroundColor: '#A77734' }} />
-                    <span className="font-semibold" style={{ fontSize: 14, color: '#2B2924' }}>At Risk</span>
-                  </div>
-                  <ChevronDownIcon />
-                </div>
+                <DropdownField
+                  label="Status"
+                  value={
+                    <div className="flex items-center gap-2.5">
+                      <div className="rounded-full" style={{ width: 8, height: 8, backgroundColor: '#A77734', flexShrink: 0 }} />
+                      <span className="font-semibold" style={{ fontSize: 14, color: '#2B2924' }}>At Risk</span>
+                    </div>
+                  }
+                />
               </div>
-
-              {/* Stage */}
               <div style={{ width: 200 }}>
-                <div style={{ fontSize: 12, fontWeight: 500, color: '#6E665C', marginBottom: 8 }}>Stage</div>
-                <div
-                  className="flex items-center justify-between"
-                  style={{
-                    backgroundColor: '#FFFDF8',
-                    border: '1px solid #D8C8B7',
-                    borderRadius: 10,
-                    padding: '10px 14px',
-                    height: 44,
-                    cursor: 'pointer',
-                  }}
-                >
-                  <span style={{ fontSize: 14, fontWeight: 500, color: '#2B2924' }}>Final copy approval</span>
-                  <ChevronDownIcon />
-                </div>
+                <DropdownField
+                  label="Stage"
+                  value={<span style={{ fontSize: 14, fontWeight: 500, color: '#2B2924' }}>Final copy approval</span>}
+                />
               </div>
-
-              {/* Due Date */}
               <div style={{ width: 174 }}>
-                <div style={{ fontSize: 12, fontWeight: 500, color: '#6E665C', marginBottom: 8 }}>Due Date</div>
-                <div
-                  className="flex items-center justify-between"
-                  style={{
-                    backgroundColor: '#FFFDF8',
-                    border: '1px solid #D8C8B7',
-                    borderRadius: 10,
-                    padding: '10px 14px',
-                    height: 44,
-                    cursor: 'pointer',
-                  }}
-                >
-                  <span style={{ fontSize: 14, fontWeight: 500, color: '#2B2924' }}>Today, 5:00 PM</span>
-                  <ChevronDownIcon />
-                </div>
+                <DropdownField
+                  label="Due Date"
+                  value={<span style={{ fontSize: 14, fontWeight: 500, color: '#2B2924' }}>Today, 5:00 PM</span>}
+                />
               </div>
             </div>
 
             {/* Message textarea */}
-            <div>
-              <div className="font-semibold mb-2.5" style={{ fontSize: 13, color: '#2B2924' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <div className="font-semibold" style={{ fontSize: 13, color: '#2B2924' }}>
                 Message to Rova's Team
               </div>
               <textarea
@@ -278,65 +291,48 @@ export default function PmStage2() {
                   fontFamily: 'inherit',
                 }}
               />
-              <div style={{ fontSize: 11, color: '#8A8074', marginTop: 6 }}>
+              <div style={{ fontSize: 11, color: '#8A8074' }}>
                 This note is used to generate a client-facing draft.
               </div>
             </div>
 
             {/* Action buttons */}
-            <div className="flex items-center gap-3">
+            <div style={{ display: 'flex', gap: 11, alignItems: 'center' }}>
               <button
                 style={{
-                  fontSize: 14,
-                  fontWeight: 600,
-                  color: '#5C554B',
-                  backgroundColor: '#FFFDF8',
-                  border: '1px solid #CFC1B2',
-                  borderRadius: 10,
-                  padding: '10px 22px',
-                  cursor: 'pointer',
+                  fontSize: 14, fontWeight: 600, color: '#5C554B',
+                  backgroundColor: '#FFFDF8', border: '1px solid #CFC1B2',
+                  borderRadius: 10, padding: '10px 22px', cursor: 'pointer',
                 }}
               >
                 Save draft
               </button>
               <button
-                onClick={handleGenerate}
+                onClick={() => setGenerated(true)}
                 style={{
-                  fontSize: 14,
-                  fontWeight: 600,
-                  color: 'white',
-                  backgroundColor: '#677F5A',
-                  border: '1px solid #677F5A',
-                  borderRadius: 10,
-                  padding: '10px 22px',
-                  cursor: 'pointer',
+                  fontSize: 14, fontWeight: 600, color: 'white',
+                  backgroundColor: '#677F5A', border: '1px solid #757575',
+                  borderRadius: 10, padding: '10px 22px', cursor: 'pointer',
                 }}
               >
-                Generate ✦
+                Generate
               </button>
             </div>
 
             {/* Pinned attachments */}
             <div>
-              <div className="font-semibold mb-3" style={{ fontSize: 16, color: '#2B2924' }}>
+              <div className="font-semibold" style={{ fontSize: 18, color: '#2B2924', marginBottom: 16 }}>
                 Pinned attachments
               </div>
-              <div className="flex gap-2.5">
-                {/* Campaign brief */}
+              <div style={{ display: 'flex', gap: 10 }}>
                 <div
-                  className="flex items-center gap-2.5"
                   style={{
-                    backgroundColor: '#FFFDF8',
-                    border: '1px solid #E7D9C8',
-                    borderRadius: 12,
-                    padding: '10px 14px',
-                    flex: 1,
+                    flex: 1, backgroundColor: '#FFFDF8', border: '1px solid #E7D9C8',
+                    borderRadius: 12, padding: '10px 14px',
+                    display: 'flex', alignItems: 'center', gap: 10,
                   }}
                 >
-                  <div
-                    className="flex items-center justify-center shrink-0"
-                    style={{ width: 40, height: 40, backgroundColor: '#F3E6D8', borderRadius: 8 }}
-                  >
+                  <div style={{ width: 40, height: 40, backgroundColor: '#F3E6D8', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                     <DocIcon color="#C95632" />
                   </div>
                   <div>
@@ -344,21 +340,14 @@ export default function PmStage2() {
                     <div style={{ fontSize: 10, color: '#6E665C' }}>Google Doc • Updated yesterday</div>
                   </div>
                 </div>
-                {/* Final copy doc */}
                 <div
-                  className="flex items-center gap-2.5"
                   style={{
-                    backgroundColor: '#FFFDF8',
-                    border: '1px solid #E7D9C8',
-                    borderRadius: 12,
-                    padding: '10px 14px',
-                    flex: 1,
+                    flex: 1, backgroundColor: '#FFFDF8', border: '1px solid #E7D9C8',
+                    borderRadius: 12, padding: '10px 14px',
+                    display: 'flex', alignItems: 'center', gap: 10,
                   }}
                 >
-                  <div
-                    className="flex items-center justify-center shrink-0"
-                    style={{ width: 40, height: 40, backgroundColor: '#FDEADE', borderRadius: 8 }}
-                  >
+                  <div style={{ width: 40, height: 40, backgroundColor: '#FDEADE', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                     <CheckDocIcon />
                   </div>
                   <div>
@@ -369,7 +358,6 @@ export default function PmStage2() {
               </div>
             </div>
 
-            {/* Edit Progress Timeline link */}
             <a href="#" style={{ fontSize: 12, color: '#2B2924', textDecoration: 'underline' }}>
               Edit Progress Timeline
             </a>
@@ -382,96 +370,108 @@ export default function PmStage2() {
               backgroundColor: '#F3EDF5',
               border: '1px solid #D8C7DD',
               borderRadius: 16,
-              padding: '20px',
+              padding: 20,
               display: 'flex',
               flexDirection: 'column',
               gap: 16,
-              alignSelf: 'stretch',
             }}
           >
             {/* Panel header */}
-            <div className="flex items-start gap-2">
+            <div style={{ display: 'flex', gap: 8, alignItems: 'flex-start' }}>
               <SparklesIcon />
               <div>
-                <div className="font-semibold" style={{ fontSize: 13, color: '#677F5A' }}>
-                  Generated Message
-                </div>
+                <div className="font-semibold" style={{ fontSize: 13, color: '#677F5A' }}>Generated Message</div>
                 <div style={{ fontSize: 8, color: '#6E665C', lineHeight: 1.5, marginTop: 3, maxWidth: 152 }}>
                   Message will be visible to Rova's team once published
                 </div>
               </div>
             </div>
 
-            {/* Draft card */}
+            {/* Draft card — flex:1 to fill remaining height */}
             <div
               style={{
+                flex: 1,
                 backgroundColor: '#FFFDF8',
                 border: '1px solid #D8C7DD',
                 borderRadius: 16,
                 padding: 20,
-                flex: 1,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 16,
               }}
             >
               {generated ? (
-                <div>
-                  <div className="font-semibold mb-2" style={{ fontSize: 13, color: '#2B2924' }}>
-                    Draft ready
-                  </div>
-                  <p style={{ fontSize: 12, color: '#5C554B', lineHeight: 1.6, whiteSpace: 'pre-wrap', marginBottom: 16 }}>
-                    {generatedText}
+                <>
+                  <p style={{ fontSize: 13, color: '#2B2924', lineHeight: 1.6, flex: 1 }}>
+                    {DRAFT_TEXT}
                   </p>
-                  <div style={{ fontSize: 10, color: '#D89B35', lineHeight: 1.6 }}>
+                  <div style={{ fontSize: 10, color: '#D89B35', lineHeight: 1.8 }}>
                     <div><span style={{ fontWeight: 600 }}>Status: </span>At Risk</div>
                     <div><span style={{ fontWeight: 600 }}>Waiting on: </span>Rova's Team</div>
                   </div>
-                  <button
-                    onClick={() => navigate('/pm/publish')}
-                    style={{
-                      marginTop: 16,
-                      width: '100%',
-                      fontSize: 13,
-                      fontWeight: 600,
-                      color: 'white',
-                      backgroundColor: '#677F5A',
-                      border: 'none',
-                      borderRadius: 10,
-                      padding: '10px 0',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    Review &amp; Publish →
-                  </button>
-                </div>
-              ) : (
-                <div>
-                  <div className="font-semibold mb-2" style={{ fontSize: 15, color: '#2B2924' }}>
-                    No draft yet
+                  {/* Edit + Regenerate */}
+                  <div style={{ display: 'flex', gap: 7 }}>
+                    <button
+                      style={{
+                        display: 'flex', alignItems: 'center', gap: 6,
+                        fontSize: 10, fontWeight: 600, color: '#A77734',
+                        backgroundColor: 'white', border: '1px solid #A77734',
+                        borderRadius: 10, padding: '6px 14px', cursor: 'pointer',
+                      }}
+                    >
+                      <EditIcon /> Edit
+                    </button>
+                    <button
+                      onClick={() => setGenerated(false)}
+                      style={{
+                        display: 'flex', alignItems: 'center', gap: 5,
+                        fontSize: 10, fontWeight: 600, color: '#C95632',
+                        backgroundColor: 'white', border: '1px solid #C95632',
+                        borderRadius: 10, padding: '6px 12px', cursor: 'pointer',
+                      }}
+                    >
+                      ✦ Regenerate
+                    </button>
                   </div>
-                  <p style={{ fontSize: 13, color: '#2B2924', lineHeight: 1.5, marginBottom: 14 }}>
+                </>
+              ) : (
+                <>
+                  <div className="font-semibold" style={{ fontSize: 15, color: '#2B2924' }}>No draft yet</div>
+                  <p style={{ fontSize: 13, color: '#2B2924', lineHeight: 1.5 }}>
                     Key in the message to generate a client-facing draft.
                   </p>
                   <div style={{ fontSize: 10, color: '#D89B35', lineHeight: 1.8 }}>
                     <div><span style={{ fontWeight: 600 }}>Status: </span>At Risk</div>
                     <div><span style={{ fontWeight: 600 }}>Waiting on: </span>Rova's Team</div>
                   </div>
-                </div>
+                </>
               )}
             </div>
+
+            {/* Publish button — only shown after generate */}
+            {generated && (
+              <button
+                style={{
+                  width: '100%', height: 43,
+                  fontSize: 14, fontWeight: 600, color: 'white',
+                  backgroundColor: '#C95632', border: '1px solid #C95632',
+                  borderRadius: 10, cursor: 'pointer',
+                }}
+              >
+                Publish
+              </button>
+            )}
           </div>
+
         </div>
 
         {/* Bottom — Add New Message */}
         <div style={{ marginTop: 28 }}>
           <button
             style={{
-              fontSize: 14,
-              fontWeight: 600,
-              color: '#FFFDF8',
-              backgroundColor: '#C95632',
-              border: 'none',
-              borderRadius: 12,
-              padding: '12px 24px',
-              cursor: 'pointer',
+              fontSize: 14, fontWeight: 600, color: '#FFFDF8',
+              backgroundColor: '#C95632', border: 'none',
+              borderRadius: 12, padding: '12px 24px', cursor: 'pointer',
             }}
           >
             + Add New Message
