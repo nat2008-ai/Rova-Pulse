@@ -79,7 +79,7 @@ export default function CampaignDetail() {
               </span>
             </div>
             <p style={{ fontSize: 14, color: '#6E665C' }}>
-              Launch date: 21 May 2025 &bull; Last updated today, 10:15 AM by Devlab PM
+              Launch date: 21 May 2026 &bull; Last updated today, 10:15 AM by Devlab PM
             </p>
           </div>
         </div>
