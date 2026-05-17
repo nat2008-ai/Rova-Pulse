@@ -131,8 +131,6 @@ const campaignQueue = [
 
 export default function PmDashboard() {
   const [search, setSearch] = useState('');
-  const [addingNote, setAddingNote] = useState(false);
-  const [noteText, setNoteText] = useState('');
 
   const filtered = campaignQueue.filter(c =>
     c.name.toLowerCase().includes(search.toLowerCase())
@@ -301,75 +299,6 @@ export default function PmDashboard() {
                 <div style={{ fontSize: 11, color: '#B8A99A' }}>
                   You're all caught up. Any questions you ask Rova will appear here.
                 </div>
-                {addingNote ? (
-                  <div style={{ marginTop: 14, textAlign: 'left' }}>
-                    <textarea
-                      value={noteText}
-                      onChange={e => setNoteText(e.target.value)}
-                      placeholder="Type your follow-up question..."
-                      rows={3}
-                      style={{
-                        width: '100%',
-                        border: '1px solid #D9B36C',
-                        borderRadius: 8,
-                        padding: '8px 10px',
-                        fontSize: 12,
-                        color: '#2B2924',
-                        backgroundColor: '#FFFDF8',
-                        outline: 'none',
-                        resize: 'vertical',
-                        boxSizing: 'border-box',
-                      }}
-                    />
-                    <div className="flex gap-2 mt-2">
-                      <button
-                        onClick={() => { setAddingNote(false); setNoteText(''); }}
-                        style={{
-                          fontSize: 11,
-                          color: '#8A8074',
-                          border: '1px solid #E7D9C8',
-                          backgroundColor: 'transparent',
-                          borderRadius: 7,
-                          padding: '5px 12px',
-                          cursor: 'pointer',
-                        }}
-                      >
-                        Cancel
-                      </button>
-                      <button
-                        style={{
-                          fontSize: 11,
-                          color: 'white',
-                          backgroundColor: '#C95632',
-                          border: 'none',
-                          borderRadius: 7,
-                          padding: '5px 14px',
-                          cursor: 'pointer',
-                          fontWeight: 600,
-                        }}
-                      >
-                        Send
-                      </button>
-                    </div>
-                  </div>
-                ) : (
-                  <button
-                    onClick={() => setAddingNote(true)}
-                    style={{
-                      marginTop: 12,
-                      fontSize: 11,
-                      color: '#C95632',
-                      border: '1px dashed #C95632',
-                      backgroundColor: 'transparent',
-                      borderRadius: 7,
-                      padding: '5px 14px',
-                      cursor: 'pointer',
-                      fontWeight: 500,
-                    }}
-                  >
-                    + Add note / question
-                  </button>
-                )}
               </div>
             </div>
 
