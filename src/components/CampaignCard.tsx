@@ -18,6 +18,7 @@ interface CampaignCardProps {
   stripCTA: string;
   highlighted?: boolean;
   navigateTo?: string;
+  notificationCount?: number;
 }
 
 const statusConfig = {
@@ -80,6 +81,15 @@ function CalendarIcon() {
     </svg>
   );
 }
+function BellIconWhite() {
+  return (
+    <svg width="14" height="15" viewBox="0 0 14 15" fill="none">
+      <path d="M7 1.5C7 1.5 3.5 3.5 3.5 8V12H10.5V8C10.5 3.5 7 1.5 7 1.5Z" stroke="#FFFDF8" strokeWidth="1.2" strokeLinejoin="round"/>
+      <path d="M5.5 12C5.5 12.8 6.2 13.5 7 13.5C7.8 13.5 8.5 12.8 8.5 12" stroke="#FFFDF8" strokeWidth="1.2"/>
+      <path d="M7 1.5V1" stroke="#FFFDF8" strokeWidth="1.2" strokeLinecap="round"/>
+    </svg>
+  );
+}
 function ClockIcon() {
   return (
     <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
@@ -105,6 +115,7 @@ export default function CampaignCard({
   stripCTA,
   highlighted = false,
   navigateTo,
+  notificationCount = 0,
 }: CampaignCardProps) {
   const navigate = useNavigate();
   const cfg = statusConfig[status];
@@ -176,7 +187,7 @@ export default function CampaignCard({
         <div className="shrink-0 self-center" style={{ width: 1, height: 80, backgroundColor: '#E7D9C8', marginRight: 20 }} />
 
         {/* Column 3 — Timing */}
-        <div style={{ width: 178 }}>
+        <div style={{ flex: 1 }}>
           <div className="flex items-start gap-1.5 mb-3" style={{ color: '#6E665C' }}>
             <ClockIcon />
             <div>
@@ -189,6 +200,30 @@ export default function CampaignCard({
             <div className="font-semibold" style={{ fontSize: 12, color: '#2B2924' }}>{nextMilestone}</div>
             <div className="font-medium" style={{ fontSize: 11, color: cfg.milestoneColor }}>{nextMilestoneDue}</div>
           </div>
+        </div>
+
+        {/* Bell notification button */}
+        <div className="relative shrink-0 self-start" style={{ marginLeft: 12 }}>
+          <div
+            className="flex items-center justify-center rounded-full"
+            style={{ width: 32, height: 32, backgroundColor: '#6E665C' }}
+          >
+            <BellIconWhite />
+          </div>
+          {notificationCount > 0 && (
+            <div
+              className="absolute flex items-center justify-center font-bold rounded-full"
+              style={{
+                top: -4, right: -6,
+                width: 18, height: 18,
+                backgroundColor: '#D65B35',
+                fontSize: 9,
+                color: '#FFFDF8',
+              }}
+            >
+              {notificationCount}
+            </div>
+          )}
         </div>
       </div>
 
